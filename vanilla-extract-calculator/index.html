@@ -23,13 +23,11 @@
 						<input type="text" id="volume" name="volume">
 						<select id="measurement" name="measurement">
 							<option value="oz">Ounces</option>
-							<option value="cups">Cups</option>
-							<option value="ml">Milliliters</option>
 						</select>
 
 	
 						<br><br>
-						<input value="Calculate!" type="button" onclick="calculateExtractRequirements()">
+						<input value="Calculate!" type="submit" onsubmit="calculateExtractRequirements()">
 					</form> 
 				</div>
 			</div>
@@ -46,7 +44,7 @@
 	
         //console.log(singleFold);
 	function calculateExtractRequirements(){
-
+		event.preventDefault();
 		let userFold = document.getElementById("fold").value
 		let volume = parseFloat(document.getElementById("volume").value);
 		let measurement = document.getElementById("measurement").value;
