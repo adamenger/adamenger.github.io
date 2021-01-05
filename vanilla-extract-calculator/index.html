@@ -50,10 +50,10 @@
 		let measurement = document.getElementById("measurement").value;
 
 		if (userFold == "single") {
-			var beansPerOz = parseFloat((singleFold / ozInGallon) * volume).toFixed(2);
+			var beansPerOz = parseFloat((singleFold / ozInGallon)).toFixed(2);
 			var totalBeanWeight = parseFloat((volume / ozInGallon) * singleFold).toFixed(2);
 		} else if (userFold == "double") {
-			var beansPerOz = parseFloat((doubleFold / ozInGallon) * volume).toFixed(2);
+			var beansPerOz = parseFloat((doubleFold / ozInGallon)).toFixed(2);
 			var totalBeanWeight = parseFloat((volume / ozInGallon) * doubleFold).toFixed(2);
 		}
 
