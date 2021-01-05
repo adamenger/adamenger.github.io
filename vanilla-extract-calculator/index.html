@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<title>Vanilla Extract Calculator</title>
+		<link rel="stylesheet" href="simple-grid.min.css">
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>Vanilla Extract Calculator</h1>
+			<div class="row">
+				<div class="col-10">
+					<form>
+						<label for="fold">What strength of extract would you like to end up with?</label><br>
+						<select id="fold" name="fold">
+							<option value="single">Single Fold</option>
+							<option value="double">Double Fold</option>
+						</select>
+						<br><br>
+						<label for="volume">Next, lets decide how much extract do you want to make:</label><br>
+						<input type="text" id="volume" name="volume">
+						<select id="measurement" name="measurement">
+							<option value="oz">Ounces</option>
+							<option value="cups">Cups</option>
+							<option value="ml">Milliliters</option>
+						</select>
+
+	
+						<br><br>
+						<input value="Calculate!" type="button" onclick="calculateExtractRequirements()">
+					</form> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-10">
+					<span id="result"></span>
+				</div>
+			</div>
+		</div>
+	<script type="text/javascript">
+	let singleFold = 13.35;
+	let doubleFold = 26.7;
+	let ozInGallon = 128;
+	
+        //console.log(singleFold);
+	function calculateExtractRequirements(){
+
+		let userFold = document.getElementById("fold").value
+		let volume = parseFloat(document.getElementById("volume").value);
+		let measurement = document.getElementById("measurement").value;
+
+		if (userFold == "single") {
+			var beansPerOz = parseFloat((singleFold / ozInGallon) * volume).toFixed(2);
+			var totalBeanWeight = parseFloat((volume / ozInGallon) * singleFold).toFixed(2);
+		} else if (userFold == "double") {
+			var beansPerOz = parseFloat((doubleFold / ozInGallon) * volume).toFixed(2);
+			var totalBeanWeight = parseFloat((volume / ozInGallon) * doubleFold).toFixed(2);
+		}
+
+		// set result text
+		document.getElementById("result").innerHTML = `For a ${userFold} strength vanilla extract, you will need approximately ${beansPerOz} ounces of vanilla bean per oz of Alcohol. In total, you will need ${totalBeanWeight} ounces of Vanilla Beans to make ${volume} ounces of vanilla extract.`; 
+	
+
+	}
+
+	</script>
+
+	</body>
+</html>
