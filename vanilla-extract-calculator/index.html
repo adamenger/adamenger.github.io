@@ -12,7 +12,7 @@
 			<h1>Vanilla Extract Calculator</h1>
 			<div class="row">
 				<div class="col-10">
-					<form>
+					<form onsubmit="calculateExtractRequirements(event);">
 						<label for="fold">What strength of extract would you like to end up with?</label><br>
 						<select id="fold" name="fold">
 							<option value="single">Single Fold</option>
@@ -27,7 +27,7 @@
 
 	
 						<br><br>
-						<input value="Calculate!" type="submit" onsubmit="calculateExtractRequirements()">
+						<input value="Calculate!" type="submit">
 					</form> 
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 	let ozInGallon = 128;
 	
         //console.log(singleFold);
-	function calculateExtractRequirements(){
+	function calculateExtractRequirements(event){
 		event.preventDefault();
 		let userFold = document.getElementById("fold").value
 		let volume = parseFloat(document.getElementById("volume").value);
