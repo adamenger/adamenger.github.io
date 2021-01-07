@@ -1,69 +1,78 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-		<meta content="utf-8" http-equiv="encoding">
-		<title>Vanilla Extract Calculator</title>
-		<link rel="stylesheet" href="simple-grid.min.css">
-	</head>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>Vanilla Extract Calculator</title>
+    <link rel="stylesheet" href="simple-grid.min.css">
+  </head>
 
-	<body>
-		<div class="container">
-			<h1>Vanilla Extract Calculator</h1>
-			<div class="row">
-				<div class="col-10">
-					<form onsubmit="calculateExtractRequirements(event);">
-						<label for="fold">First, you should decide what strength of extract you would like to end up with:</label><br>
-						<select id="fold" name="fold">
-							<option value="single">Single Fold</option>
-							<option value="double">Double Fold</option>
-						</select>
-						<br><br>
-						<label for="volume">Next, lets decide how much extract do you want to make:</label><br>
-						<input type="text" id="volume" name="volume">
-						<select id="measurement" name="measurement">
-							<option value="oz">Ounces</option>
-						</select>
+  <body>
+    <div class="container">
+      <a href="https://adamenger.com/"><</a><h1>Vanilla Extract Calculator</h1>
+      <div class="row">
+        <div class="col-10">
+          <form>
+            <label for="fold">What strength of extract would you like to end up with?</label><br>
+            <select id="fold" name="fold">
+              <option value="single">Single Fold</option>
+              <option value="double">Double Fold</option>
+            </select>
+            <br><br>
+            <label for="volume">Next, lets decide how much extract do you want to make:</label><br>
+            <input type="text" id="volume" name="volume" required="true">
+            <select id="measurement" name="measurement">
+              <option value="oz">Ounces</option>
+              <option value="cups">Cups</option>
+              <option value="ml">Milliliters</option>
+            </select>
 
-	
-						<br><br>
-						<input value="Calculate!" type="submit">
-					</form> 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-10">
-					<span id="result"></span>
-				</div>
-			</div>
-		</div>
-	<script type="text/javascript">
-	let singleFold = 13.35;
-	let doubleFold = 26.7;
-	let ozInGallon = 128;
-	
+  
+            <br><br>
+            <input value="Calculate!" type="button" onclick="calculateExtractRequirements()">
+          </form> 
+        </div>
+      </div>
+      <div class="row">
+        <h2>Results</h2>
+        <div class="col-10">
+          <span id="result"></span>
+        </div>
+      </div>
+      <div class="row">
+      <h2>Notes</h2>
+      <p>This calculator is designed according to the <a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfcfr/cfrsearch.cfm?fr=169.3">FDA Standards for Vanilla Extract.</a></p>
+      <p>Feel free to double check <a href="https://github.com/adamenger/adamenger.github.io/blob/master/vanilla-extract-calculator/index.html">my work!</a></p>
+      </div>
+    </div>
+
+  <script type="text/javascript">
+  let singleFold = 13.35;
+  let doubleFold = 26.7;
+  let ozInGallon = 128;
+  
         //console.log(singleFold);
-	function calculateExtractRequirements(event){
-		event.preventDefault();
-		let userFold = document.getElementById("fold").value
-		let volume = parseFloat(document.getElementById("volume").value);
-		let measurement = document.getElementById("measurement").value;
+  function calculateExtractRequirements(){
+    let userFold = document.getElementById("fold").value
+    let volume = parseFloat(document.getElementById("volume").value);
+    let measurement = document.getElementById("measurement").value;
 
-		if (userFold == "single") {
-			var beansPerOz = parseFloat((singleFold / ozInGallon)).toFixed(2);
-			var totalBeanWeight = parseFloat((volume / ozInGallon) * singleFold).toFixed(2);
-		} else if (userFold == "double") {
-			var beansPerOz = parseFloat((doubleFold / ozInGallon)).toFixed(2);
-			var totalBeanWeight = parseFloat((volume / ozInGallon) * doubleFold).toFixed(2);
-		}
+    switch(userFold) {
+      case "single":
+      var beansPerOz = parseFloat((singleFold / ozInGallon) * volume).toFixed(2);
+      var totalBeanWeight = parseFloat((volume / ozInGallon) * singleFold).toFixed(2);
+      break;
+      case "double":
+      var beansPerOz = parseFloat((doubleFold / ozInGallon) * volume).toFixed(2);
+      var totalBeanWeight = parseFloat((volume / ozInGallon) * doubleFold).toFixed(2);
+      break;
+    }
 
-		// set result text
-		document.getElementById("result").innerHTML = `For a ${userFold} fold vanilla extract, you will need approximately ${beansPerOz} ounces of vanilla bean per oz of Alcohol. In total, you will need ${totalBeanWeight} ounces of Vanilla Beans to make ${volume} ounces of vanilla extract.`; 
-	
+    // set result text
+    document.getElementById("result").innerHTML = `You will need ${totalBeanWeight} ounces of Vanilla Beans to make ${volume} ounces of ${userFold} fold vanilla extract.`; 
+  }
 
-	}
+  </script>
 
-	</script>
-
-	</body>
+  </body>
 </html>
