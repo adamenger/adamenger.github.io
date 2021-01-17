@@ -5,13 +5,13 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
-  <loc>https://adamenger.com/</loc>
+  <loc>https://www.adamenger.com/</loc>
   <lastmod>2021-01-10T02:18:11+00:00</lastmod>
   <priority>1.00</priority>
   <changefreq>yearly</changefreq>
 </url>
 <url>
-  <loc>https://adamenger.com/vanilla-extract-calculator/</loc>
+  <loc>https://www.adamenger.com/vanilla-extract-calculator/</loc>
   <lastmod>2021-01-10T02:18:11+00:00</lastmod>
   <priority>0.90</priority>
   <changefreq>yearly</changefreq>
