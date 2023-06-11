@@ -56,7 +56,7 @@ h1, h2 {
 .container {
   width: 90%; /* set the width to a percentage */
   max-width: 900px; /* set a max-width so it doesn't get too wide on large screens */
-  margin: auto;
+  margin: 0.5em auto;
   background: rgba(255, 255, 255, 0.8);
   padding: 2%; /* use percentage for padding as well */
   border-radius: 1.5rem; /* use rem units for border-radius */
