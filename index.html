@@ -3,7 +3,8 @@
   <head>
     <title>Adam Enger</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="static/simple-grid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="static/styles.css">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
 
@@ -11,79 +12,78 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12293388-5"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-              gtag('config', 'UA-12293388-5');
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-12293388-5');
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-6">
+
+      <header class="header-section">
+        <div>
           <h1>Adam Enger</h1>
           <p>{app, systems, security, sound} engineer</p>
         </div>
-        <div class="col-4">
+        <div class="profile-section">
           <img style="border-radius: 20px; width: 150px;" src="profile.png" alt="Adam Enger">
+          <button class="pride-button" aria-label="Celebrate Pride">CELEBRATE PRIDE!<span id="emoji">🌈</span></button>
         </div>
-      </div>
+      </header>
 
-      <div class="row">
-        <div class="col-6">
-          <h2>Where you can find me</h2>
-          <ul>
-            <li> <a href="https://soundcloud.com/adamenger">https://soundcloud.com/adamenger</a>
-            <li> <a href="https://hackerone.com/atom_enger">https://hackerone.com/atom_enger</a>
-            <li> <a href="https://github.com/adamenger">https://github.com/adamenger</a>
-            <li> <a href="https://terabytelabs.etsy.com">Terabyte Labs @ Etsy</a>
-            <li> <a href="https://www.kiva.org/lender/adamenger">https://www.kiva.org/lender/adamenger</a>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-6">
-          <h2>Tools I've made</h2>
-          <ul>
-            <li><a href="/vanilla-extract-calculator">Vanilla Extract Calculator</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-10">
-          <h2>Security Hall of Fame</h2>
-          <p>This is a list of companies that have noted my contributions to their security posture publicly. Some have even offered contracts or full time employment as a result of my findings.</p>
-          <ul>
-            <li>
-              <a href="https://reverb.com">Reverb</a>
-            </li>
-            <li>
-              <a href="https://www.etsy.com/bounty/hall-of-fame">Etsy</a>
-            </li>
-            <li>
-              <a href="https://www.aptible.com/legal/responsible-disclosure/">Aptible</a>
-            </li>
-            <li>
-              <a href="http://docs.honeybadger.io/guides/security.html">HoneyBadger.io</a>
-            </li>
-            <li>
-              <a href="https://buffer.com/security">Buffer</a>
-            </li>
-            <li>
-              <a href="https://hackerone.com/atom_enger?type=user">Slack</a>
-            </li>
-            <li>
-              <a href="https://hackerone.com/atom_enger?type=user">Zomato</a>
-            </li>
-            <li>
-              <a href="https://security.intuit.com/index.php/report-an-issue/security-researcher-acknowledgements">Intuit</a>
-            </li>
-            <li>
-              <a href="https://rjmetrics.com/security/">RJ Metrics</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <main>
+        <section>
+          <div class="row">
+            <div class="col-6">
+              <h2>Where you can find me</h2>
+              <ul>
+                <li><a href="https://soundcloud.com/the-atomic-music-machine">Soundcloud</a></li>
+                <li><a href="https://hackerone.com/atom_enger">HackerOne</a></li>
+                <li><a href="https://github.com/adamenger">GitHub</a></li>
+                <li><a href="https://terabytelabs.etsy.com">Terabyte Labs @ Etsy</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="row">
+            <div class="col-6">
+              <h2>Tools I've made</h2>
+              <ul>
+                <li><a href="/vanilla-extract-calculator">Vanilla Extract Calculator</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="row">
+            <div class="col-10">
+              <h2>Security Hall of Fame</h2>
+              <p>This is a list of companies that have noted my contributions to their security posture publicly. Some have even offered contracts or full time employment as a result of my findings.</p>
+              <ul>
+                <li><a href="https://reverb.com">Reverb</a></li>
+                <li><a href="https://www.etsy.com/bounty/hall-of-fame">Etsy</a></li>
+                <li><a href="https://www.aptible.com/legal/responsible-disclosure/">Aptible</a></li>
+                <li><a href="http://docs.honeybadger.io/guides/security.html">HoneyBadger.io</a></li>
+                <li><a href="https://buffer.com/security">Buffer</a></li>
+                <li><a href="https://security.intuit.com/index.php/report-an-issue/security-researcher-acknowledgements">Intuit</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
+    <script>
+      // roll the background when pride button is clicked
+      document.querySelector('.pride-button').addEventListener('click', function() {
+        document.body.classList.add('animate');
+        document.getElementById('emoji').classList.add('spin');
+      });
+    </script>
   </body>
 </html>
+
