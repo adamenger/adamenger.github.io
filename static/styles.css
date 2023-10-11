@@ -9,29 +9,7 @@ body {
   line-height: 1.5;
   letter-spacing: 0.12em;
   word-spacing: 0.16em;
-  background-size: 200% 200%;
-  background-image: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet, indigo, blue, cyan, green, yellow, orange, red);
-}
-
-body.animate {
-  animation: gradient 30s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+  background-color: #FFB6C1;
 }
 
 .header-section {
