@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <title>Switch Configurator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+</head>
+<body>
+
+    <div class="columns">
+    <section class="section column is-half" class="m-4">
+        <h1 class="is-size-3">Switch Configurator</h1>
+        <hr>   
+        <label for="portCount">Number of Ports:</label>
+        <input class="input is-primary" type="number" placeholder="Number of Ports" id="portCount">
+
+        <hr>
+        <h2 class="is-size-4">Config Variables</h2>
+        <button class="button is-primary is-size-7" onclick="addKeyValuePair()">
+            <span>&#43;</span>
+        </button>
+        <div id="keyValuePairs" class="p-1"></div>
+        <hr>
+
+        <h2 class="is-size-4">Configuration Template</h2>
+        <textarea class="textarea" id="template" rows="20" cols="50" placeholder="Enter Config Template Here..."></textarea>
+    </section>
+
+    <section class="section" class="m-4">
+            <h2 class="is-size-3">Port Configs</h2>
+            <button class="button is-primary" onclick="generateTable()">Generate Ports</button>
+            <hr>
+            <div id="tableContainer"></div>
+    </section>
+
+    </div> 
+
+    <script src="app.js"></script>
+</body>
+</html>
