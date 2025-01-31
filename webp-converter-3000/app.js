@@ -51,49 +51,48 @@ async function handleFile(file) {
   }
 }
 
-// Convert image to WebP
 function convertToWebP(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.onload = () => {
+            const img = new Image();
+            
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
 
-    reader.onload = () => {
-      const img = new Image();
-
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-
-        try {
-          const webpDataUrl = canvas.toDataURL('image/webp', 0.8);
-          resolve(webpDataUrl);
-        } catch (error) {
-          reject(error);
-        }
-      };
-
-      img.src = reader.result;
-    };
-
-    reader.onerror = () => reject(reader.error);
-
-    reader.readAsDataURL(file);
-  });
+                // Convert to Blob instead of a base64 string
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        resolve(blob);
+                    } else {
+                        reject(new Error('WebP conversion failed'));
+                    }
+                }, 'image/webp', 0.9);
+            };
+            
+            img.src = reader.result;
+        };
+        
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(file);
+    });
 }
 
-// Display the converted WebP image
-function displayWebPImage(webpDataUrl, originalName) {
-  const webpName = originalName.replace(/\.[^/.]+$/, '.webp'); // Replace file extension with .webp
-  downloadLink.href = webpDataUrl;
-  downloadLink.download = webpName;
-  outputImage.src = webpDataUrl;
-  downloadButton.addEventListener('click', () => downloadLink.click());
-  outputSection.classList.remove('is-hidden');
+function displayWebPImage(webpBlob, originalName) {
+    const webpName = originalName.replace(/\.[^/.]+$/, '.webp'); // Rename file
+    const webpUrl = URL.createObjectURL(webpBlob);
 
-  // Auto-download if the checkbox is checked
-  if (autoDownloadCheckbox.checked) {
+    downloadLink.href = webpUrl;
+    downloadLink.download = webpName;
+    outputImage.src = webpUrl;
+    outputSection.classList.remove('is-hidden');
+
+    if (autoDownloadCheckbox.checked) {
         downloadLink.click();
-  }
+    }
 }
