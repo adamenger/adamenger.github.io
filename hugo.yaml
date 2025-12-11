@@ -14,7 +14,7 @@ params:
   description: "Software, systems, security, and sound engineer. Two decades of experience from startups to platforms like Etsy."
   author: "Adam Enger"
   favicon: "/pink_atom.png"
-  profileImage: "/profile.png"
+  profileImage: "/profile.jpeg"
   profileMode:
     title: "Adam Enger"
     subtitle: "{software, systems, security, sound} engineer"
