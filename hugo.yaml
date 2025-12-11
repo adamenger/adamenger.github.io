@@ -78,7 +78,7 @@ menu:
       url: https://github.com/adamenger
       weight: 10
     - identifier: atomic
-      name: Atomic Computer
+      name: atomic.computer
       url: https://www.atomic.computer
       weight: 20
 
