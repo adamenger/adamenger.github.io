@@ -1,0 +1,35 @@
+{{ define "main" }}
+<section class="intro">
+    <div class="intro-header">
+        <div class="intro-text">
+            {{ with .Site.Params.profileMode.subtitle }}
+            <h1>{{ . }}<span class="cursor">_</span></h1>
+            {{ end }}
+        </div>
+        {{ with .Site.Params.profileImage }}
+        <div class="profile-image">
+            <img src="{{ . }}" alt="{{ $.Site.Title }}">
+        </div>
+        {{ end }}
+    </div>
+</section>
+
+{{ range .Site.Params.sections }}
+<section class="section">
+    <h2>> {{ .title }}</h2>
+    {{ if .description }}
+    <p class="section-desc">{{ .description }}</p>
+    {{ end }}
+    <ul class="link-list">
+        {{ range .links }}
+        <li>
+            <a href="{{ .url }}">{{ .name }}</a>
+            {{ with .subitems }}
+            [{{ range $i, $sub := . }}{{ if $i }}, {{ end }}<a href="{{ $sub.url }}">{{ $sub.name }}</a>{{ end }}]
+            {{ end }}
+        </li>
+        {{ end }}
+    </ul>
+</section>
+{{ end }}
+{{ end }}

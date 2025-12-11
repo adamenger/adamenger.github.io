@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vanilla Extract Calculator | Adam Enger</title>
+    <meta name="description" content="Calculate how many vanilla beans you need to make single or double fold vanilla extract according to FDA standards.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0d1117;
+            --fg: #c9d1d9;
+            --fg-muted: #8b949e;
+            --accent: #e66386;
+            --border: #30363d;
+            --input-bg: #161b22;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            --max-width: 680px;
+            --spacing: 1rem;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            color: var(--fg);
+            background: var(--bg);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing);
+        }
+
+        header {
+            padding: var(--spacing) 0;
+            margin-bottom: calc(var(--spacing) * 2);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: var(--fg-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .site-title {
+            color: var(--fg);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .site-title:hover {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing);
+            color: var(--fg);
+        }
+
+        h1 .cursor {
+            color: var(--accent);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin: calc(var(--spacing) * 2) 0 var(--spacing);
+        }
+
+        p {
+            margin-bottom: var(--spacing);
+            color: var(--fg-muted);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Styles */
+        .calculator {
+            background: var(--input-bg);
+            padding: calc(var(--spacing) * 1.5);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            margin-bottom: calc(var(--spacing) * 2);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--fg);
+            font-size: 0.875rem;
+        }
+
+        select, input[type="text"], input[type="number"] {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg);
+            color: var(--fg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--accent);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-row input {
+            flex: 1;
+            min-width: 0;
+        }
+
+        button {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            padding: 0.625rem 1.25rem;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: opacity 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* Result */
+        .result {
+            background: var(--input-bg);
+            padding: var(--spacing);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            margin-bottom: calc(var(--spacing) * 2);
+            min-height: 3rem;
+        }
+
+        .result:empty::before {
+            content: "Enter values above and click Calculate";
+            color: var(--fg-muted);
+            font-style: italic;
+        }
+
+        .result-text {
+            color: var(--fg);
+        }
+
+        .result-highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .result-error {
+            color: #f85149;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            margin-bottom: var(--spacing);
+        }
+
+        ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        ul li::before {
+            content: "→ ";
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: calc(var(--spacing) * 3);
+            padding: var(--spacing) 0;
+            border-top: 1px solid var(--border);
+            color: var(--fg-muted);
+            font-size: 0.8125rem;
+        }
+
+        .heart {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (min-width: 640px) {
+            :root {
+                --spacing: 1.5rem;
+            }
+
+            .container {
+                padding: calc(var(--spacing) * 2);
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="/" class="site-title">Adam Enger</a>
+                <a href="/" class="back-link">← back</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Vanilla Extract Calculator<span class="cursor">_</span></h1>
+
+            <div class="calculator">
+                <div class="form-group">
+                    <label for="fold">What strength of extract would you like?</label>
+                    <select id="fold" name="fold">
+                        <option value="single">Single Fold</option>
+                        <option value="double">Double Fold</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="volume">How much extract would you like to make?</label>
+                    <div class="input-row">
+                        <input type="number" id="volume" name="volume" placeholder="8" min="0.1" step="0.1">
+                        <select id="measurement" name="measurement">
+                            <option value="oz">Ounces</option>
+                            <option value="cups">Cups</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" id="calculate-btn">Calculate</button>
+            </div>
+
+            <h2>> Result</h2>
+            <div class="result" id="result"></div>
+
+            <h2>> Where I Buy Vanilla Beans</h2>
+            <p>These stores deliver the best quality beans with excellent customer service:</p>
+            <ul>
+                <li>Multiple varieties of Grade B beans from <a href="https://www.amadeusvanillabeans.com/store/extract_beans/">Amadeus Vanilla Beans</a></li>
+                <li>Mexican Grade B Extract Beans from <a href="https://www.etsy.com/listing/851372663/mexican-vanilla-pieces-affordable-option">VoladoresVanilla on Etsy</a></li>
+            </ul>
+
+            <h2>> Notes</h2>
+            <p>Calculations follow <a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfcfr/cfrsearch.cfm?fr=169.3">FDA Standards for Vanilla Extract</a> which require 13.35 oz of vanilla beans per gallon for single fold extract.</p>
+        </main>
+
+        <footer>
+            <span class="heart">♥</span> 2025
+        </footer>
+    </div>
+
+    <script>
+    (function() {
+        // FDA standard: 13.35 oz vanilla beans per gallon for single fold
+        const SINGLE_FOLD_OZ_PER_GALLON = 13.35;
+        const DOUBLE_FOLD_OZ_PER_GALLON = 26.7;
+        const OZ_PER_GALLON = 128;
+        const OZ_PER_CUP = 8;
+        // Average vanilla bean weight (Grade B extract beans)
+        const AVG_BEAN_WEIGHT_OZ = 0.1;
+
+        const volumeInput = document.getElementById("volume");
+        const foldSelect = document.getElementById("fold");
+        const measurementSelect = document.getElementById("measurement");
+        const resultEl = document.getElementById("result");
+        const calculateBtn = document.getElementById("calculate-btn");
+
+        function formatNumber(num) {
+            // Remove trailing zeros: 1.00 -> 1, 1.50 -> 1.5
+            return parseFloat(num.toFixed(2)).toString();
+        }
+
+        function pluralize(value, singular, plural) {
+            return Math.abs(value) === 1 ? singular : plural;
+        }
+
+        function calculate() {
+            const fold = foldSelect.value;
+            const volume = parseFloat(volumeInput.value);
+            const measurement = measurementSelect.value;
+
+            // Validate input
+            if (!volumeInput.value.trim() || isNaN(volume) || volume <= 0) {
+                resultEl.innerHTML = '<span class="result-error">Please enter a valid volume greater than 0.</span>';
+                return;
+            }
+
+            // Convert to ounces if cups
+            const volumeOz = measurement === "cups" ? volume * OZ_PER_CUP : volume;
+
+            // Calculate bean weight needed
+            const beansPerGallon = fold === "double" ? DOUBLE_FOLD_OZ_PER_GALLON : SINGLE_FOLD_OZ_PER_GALLON;
+            const totalBeanWeightOz = (volumeOz / OZ_PER_GALLON) * beansPerGallon;
+
+            // Estimate bean count
+            const estimatedBeanCount = Math.ceil(totalBeanWeightOz / AVG_BEAN_WEIGHT_OZ);
+
+            const foldText = fold === "double" ? "double" : "single";
+            const volumeText = measurement === "cups"
+                ? `${formatNumber(volume)} ${pluralize(volume, 'cup', 'cups')}`
+                : `${formatNumber(volume)} oz`;
+
+            resultEl.innerHTML = `
+                <span class="result-text">
+                    You need <span class="result-highlight">${formatNumber(totalBeanWeightOz)} oz</span>
+                    of vanilla beans (~<span class="result-highlight">${estimatedBeanCount} ${pluralize(estimatedBeanCount, 'bean', 'beans')}</span>)
+                    to make <span class="result-highlight">${volumeText}</span> of ${foldText} fold extract.
+                </span>`;
+        }
+
+        // Event listeners
+        calculateBtn.addEventListener("click", calculate);
+
+        volumeInput.addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                calculate();
+            }
+        });
+
+        // Auto-calculate when changing dropdowns if volume is filled
+        foldSelect.addEventListener("change", function() {
+            if (volumeInput.value) calculate();
+        });
+
+        measurementSelect.addEventListener("change", function() {
+            if (volumeInput.value) calculate();
+        });
+    })();
+    </script>
+</body>
+</html>

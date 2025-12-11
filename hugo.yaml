@@ -1,0 +1,88 @@
+baseURL: 'https://www.adamenger.com/'
+languageCode: 'en-us'
+title: 'Adam Enger'
+theme: 'terminal'
+
+markup:
+  highlight:
+    style: dracula
+    lineNos: false
+    codeFences: true
+    guessSyntax: true
+
+params:
+  description: "Software, systems, security, and sound engineer. Two decades of experience from startups to platforms like Etsy."
+  author: "Adam Enger"
+  favicon: "/pink_atom.png"
+  profileImage: "/profile.png"
+  profileMode:
+    title: "Adam Enger"
+    subtitle: "{software, systems, security, sound} engineer"
+
+  sections:
+    - title: "Where you can find me"
+      links:
+        - name: "Soundcloud"
+          url: "https://soundcloud.com/the-atomic-music-machine"
+        - name: "HackerOne"
+          url: "https://hackerone.com/atom_enger"
+        - name: "GitHub"
+          url: "https://github.com/adamenger"
+        - name: "Terabyte Labs @ Etsy"
+          url: "https://terabytelabs.etsy.com"
+        - name: "atomic.computer"
+          url: "https://www.atomic.computer"
+
+    - title: "Tools & Toys"
+      links:
+        - name: "Vanilla Extract Calculator"
+          url: "/vanilla-extract-calculator/"
+        - name: "Google Dorks for Job Hunting"
+          url: "https://docs.google.com/document/d/1634p8MlHQf03TgTFcqej75pHgsY2JdV6U4vdtPA-giM/edit?tab=t.0"
+        - name: "Generative Art Machine"
+          url: "https://github.com/adamenger/generative-art-machine"
+        - name: "WebP Converter 3000"
+          url: "/webp-converter-3000/"
+        - name: "Music Video Maker"
+          url: "https://github.com/adamenger/mvm"
+          subitems:
+            - name: "1"
+              url: "https://www.youtube.com/watch?v=nhV_wMXr1aA"
+            - name: "2"
+              url: "https://www.youtube.com/watch?v=6O0GNW-yCn0"
+            - name: "3"
+              url: "https://www.youtube.com/watch?v=8RQjop12OiI"
+
+    - title: "Security Hall of Fame"
+      description: "Companies that have noted my contributions to their security posture publicly. Some have offered contracts or full time employment as a result of my findings."
+      links:
+        - name: "Etsy"
+          url: "https://www.etsy.com/bounty/hall-of-fame"
+        - name: "Reverb"
+          url: "https://reverb.com"
+        - name: "Aptible"
+          url: "https://www.aptible.com/legal/responsible-disclosure/"
+        - name: "HoneyBadger.io"
+          url: "http://docs.honeybadger.io/guides/security.html"
+        - name: "Buffer"
+          url: "https://buffer.com/security"
+        - name: "Intuit"
+          url: "https://security.intuit.com/index.php/report-an-issue/security-researcher-acknowledgements"
+        - name: "North Atlantic Seed Company"
+          url: "https://www.northatlanticseed.com/"
+
+menu:
+  main:
+    - identifier: github
+      name: GitHub
+      url: https://github.com/adamenger
+      weight: 10
+    - identifier: atomic
+      name: Atomic Computer
+      url: https://www.atomic.computer
+      weight: 20
+
+sitemap:
+  changeFreq: "monthly"
+  filename: sitemap.xml
+  priority: -1
